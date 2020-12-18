@@ -9,4 +9,5 @@ abstract class Routes {
   static const MEALS_TAPS_SCREEN = '/meals-taps-screen';
   static const ROOT_HOME = '/root-home';
   static const SETTINGS = '/settings';
+  static const FILTERS = '/filters';
 }

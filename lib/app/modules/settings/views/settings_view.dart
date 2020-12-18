@@ -8,7 +8,7 @@ class SettingsView extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MealAppBar(
-        title: 'Settings',
+        titleText: 'Settings',
       ),
       body: Center(
         child: Text(

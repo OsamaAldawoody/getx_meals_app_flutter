@@ -60,6 +60,11 @@ class MainDrawer extends GetView<DrawerService> {
               text: 'Settings',
               icon: Icons.settings,
               onTap: () => controller.drawerFunction(Routes.SETTINGS),
+            ),
+            DrawerListTile(
+              text: 'Filters',
+              icon: Icons.filter_1,
+              onTap: () => controller.drawerFunction(Routes.FILTERS),
             )
           ],
         ),

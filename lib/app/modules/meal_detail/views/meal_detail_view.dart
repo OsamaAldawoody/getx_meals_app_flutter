@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_meal_app/app/data/dummy_data.dart';
 import 'package:getx_meal_app/app/modules/meal_detail/controllers/meal_detail_controller.dart';
 import 'package:getx_meal_app/app/modules/meal_detail/views/widgets/my_container.dart';
 import 'package:getx_meal_app/app/modules/meal_detail/views/widgets/title_section.dart';
@@ -9,14 +10,12 @@ import 'package:getx_meal_app/utilities/screen_utilities.dart';
 class MealDetailView extends GetView<MealDetailController> {
   @override
   Widget build(BuildContext context) {
-    final selectedMeal = controller.selectedMeal(context);
     return Scaffold(
       appBar: MealAppBar(
-        title: selectedMeal.title,
+        titleText: controller.selectedMeal.title,
         leading: InkWell(
           onTap: () {
             Get.back();
-            print('back');
           },
           child: Icon(
             Icons.arrow_back_ios,
@@ -27,7 +26,7 @@ class MealDetailView extends GetView<MealDetailController> {
         child: Column(
           children: [
             Image.network(
-              selectedMeal.imageUrl,
+              controller.selectedMeal.imageUrl,
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -35,12 +34,12 @@ class MealDetailView extends GetView<MealDetailController> {
             TitleSection('ingredients'),
             MyContainer(
               child: ListView.builder(
-                itemCount: selectedMeal.ingredients.length,
+                itemCount: controller.selectedMeal.ingredients.length,
                 itemBuilder: (context, index) => Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      selectedMeal.ingredients[index],
+                      controller.selectedMeal.ingredients[index],
                     ),
                   ),
                 ),
@@ -49,7 +48,7 @@ class MealDetailView extends GetView<MealDetailController> {
             TitleSection('steps'),
             MyContainer(
               child: ListView.builder(
-                itemCount: selectedMeal.steps.length,
+                itemCount: controller.selectedMeal.steps.length,
                 itemBuilder: (
                   ctx,
                   index,
@@ -63,7 +62,7 @@ class MealDetailView extends GetView<MealDetailController> {
                         ),
                         backgroundColor: ScreenUtilities.primaryColor,
                       ),
-                      title: Text(selectedMeal.steps[index]),
+                      title: Text(controller.selectedMeal.steps[index]),
                     ),
                     Divider(),
                   ],
@@ -74,13 +73,23 @@ class MealDetailView extends GetView<MealDetailController> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.delete,
-          color: ScreenUtilities.black,
+        child: Obx(
+          () => Icon(
+            controller.isFavorite.value ? Icons.star : Icons.star_border,
+            color: ScreenUtilities.black,
+          ),
         ),
         backgroundColor: ScreenUtilities.accentColor,
         onPressed: () {
-          Get.back(result: controller.id);
+          controller.isFavorite.value = !controller.isFavorite.value;
+          if (controller.isFavorite.value) {
+            DataService.to.favoriteMeals.add(controller.selectedMeal);
+          } else {
+            int existingMealIndex = DataService.to.favoriteMeals
+                .indexWhere((meal) => meal.id == controller.selectedMeal.id);
+            DataService.to.favoriteMeals.remove(controller.selectedMeal);
+            Get.back(id: 2);
+          }
         },
       ),
     );

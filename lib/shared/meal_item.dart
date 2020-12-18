@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_meal_app/app/routes/app_pages.dart';
 import 'package:getx_meal_app/models/meal.dart';
+import 'meal_info_row.dart';
 
 class MealItem extends StatelessWidget {
   final String title;
@@ -115,28 +116,6 @@ class MealItem extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class MealInfoRow extends StatelessWidget {
-  final IconData icon;
-  final String info;
-  MealInfoRow({this.icon, this.info});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          Icon(icon),
-          SizedBox(
-            width: 8,
-          ),
-          Text('$info min')
-        ],
       ),
     );
   }

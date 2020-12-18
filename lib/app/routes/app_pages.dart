@@ -1,3 +1,6 @@
+import 'package:getx_meal_app/app/modules/filter/bindings/filter_binding.dart';
+import 'package:getx_meal_app/app/modules/filter/controllers/filters_controller.dart';
+import 'package:getx_meal_app/app/modules/filter/views/filters_view.dart';
 import 'package:getx_meal_app/app/modules/settings/views/settings_view.dart';
 import 'package:getx_meal_app/app/modules/settings/bindings/settings_binding.dart';
 import 'package:getx_meal_app/app/modules/meals_taps_screen/bindings/taps_screen_binding.dart';
@@ -39,9 +42,14 @@ class AppPages {
       binding: RootHomeBinding(),
     ),
     GetPage(
-      name: Routes.SETTINGS, 
-      page:()=> SettingsView(), 
+      name: Routes.SETTINGS,
+      page: () => SettingsView(),
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: Routes.FILTERS,
+      page: () => FiltersView(),
+      binding: FilterBinding(),
     ),
   ];
 }

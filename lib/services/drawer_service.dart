@@ -28,7 +28,7 @@ class DrawerService extends GetxService {
   Future<bool> backDialog() async {
     return await Get.defaultDialog<bool>(
       title: 'الخروج',
-      titleStyle: TextStyle(color: ScreenUtilities.accentColor),
+      titleStyle: TextStyle(color: ScreenUtilities.primaryColor),
       middleText: 'هل تريد الخروج من التطبيق؟',
       buttonColor: ScreenUtilities.white,
       textConfirm: 'نعم',
