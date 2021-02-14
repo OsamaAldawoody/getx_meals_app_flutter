@@ -4,6 +4,8 @@ import 'package:getx_meal_app/app/data/dummy_data.dart';
 import 'package:getx_meal_app/app/modules/meal_detail/controllers/meal_detail_controller.dart';
 import 'package:getx_meal_app/app/modules/meal_detail/views/widgets/my_container.dart';
 import 'package:getx_meal_app/app/modules/meal_detail/views/widgets/title_section.dart';
+import 'package:getx_meal_app/services/cash_service/cash_service.dart';
+import 'package:getx_meal_app/services/cash_service/favorite/favorite_meal.dart';
 import 'package:getx_meal_app/shared/meal_app_bar.dart';
 import 'package:getx_meal_app/utilities/screen_utilities.dart';
 
@@ -81,7 +83,13 @@ class MealDetailView extends GetView<MealDetailController> {
         ),
         backgroundColor: ScreenUtilities.accentColor,
         onPressed: () {
-          controller.isFavorite.value = !controller.isFavorite.value;
+          FavoriteMealService.to.setToFavorites(
+            FavoriteMeal(
+              title: controller.selectedMeal.title,
+              imageUrl: controller.selectedMeal.imageUrl,
+            ),
+          );
+          !controller.isFavorite.value;
           if (controller.isFavorite.value) {
             DataService.to.favoriteMeals.add(controller.selectedMeal);
           } else {

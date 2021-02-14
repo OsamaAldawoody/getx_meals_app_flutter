@@ -16,10 +16,11 @@ class FavoriteMealAdapter extends TypeAdapter<FavoriteMeal> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return FavoriteMeal()
+    return FavoriteMeal(
+      imageUrl: fields[2] as String,
+    )
       ..id = fields[0] as String
       ..categories = (fields[1] as List)?.cast<String>()
-      ..imageUrl = fields[2] as String
       ..ingredients = (fields[3] as List)?.cast<String>()
       ..steps = (fields[4] as List)?.cast<String>()
       ..duration = fields[5] as int

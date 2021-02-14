@@ -25,4 +25,12 @@ class FavoriteMeal extends HiveObject {
   bool isVegan;
   @HiveField(9)
   bool isVegetarian;
+  @HiveField(10)
+  bool isFavorite =true;
+
+  FavoriteMeal({
+    this.title,
+    this.imageUrl,
+    this.id,
+  });
 }
